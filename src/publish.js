@@ -1,6 +1,6 @@
 
 module.exports = {
-  publishMarkdown: function (content, fetch) {
+  publishMarkdown (content, fetch) {
     return fetch({
       method: 'POST',
       url: `https://api.github.com/gists`,
@@ -13,6 +13,14 @@ module.exports = {
           }
         }
       }
+    })
+    .then(body => body.html_url)
+  },
+  publishIssue (repo, data, fetch) {
+    return fetch({
+      method: 'POST',
+      url: `https://api.github.com/repos/${repo}/issues`,
+      body: data
     })
     .then(body => body.html_url)
   }

@@ -27,6 +27,9 @@ ${agenda}
 ${minutes}
 `
 
-    return md
+    return {
+      all: md,
+      agenda: agenda      
+    }
   }
 }
