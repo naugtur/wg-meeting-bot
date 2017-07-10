@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/naugtur/wg-meeting-bot.git"
+    "url": "git+https://github.com/naugtur/wg-meeting-cli.git"
   },
   "keywords": [],
   "author": "naugtur",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/naugtur/wg-meeting-bot/issues"
+    "url": "https://github.com/naugtur/wg-meeting-cli/issues"
   },
-  "homepage": "https://github.com/naugtur/wg-meeting-bot#readme",
+  "homepage": "https://github.com/naugtur/wg-meeting-cli#readme",
   "dependencies": {
     "markdown-escape": "^1.0.2",
     "minimist": "^1.2.0",
