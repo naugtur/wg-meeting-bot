@@ -1,6 +1,6 @@
 {
   "name": "wg-meeting-cli",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A cli tool for generating Node.js WG meeting setup",
   "bin": {
     "prepare-wg-meeting": "./src/main.js"
