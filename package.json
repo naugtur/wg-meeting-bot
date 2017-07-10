@@ -1,8 +1,10 @@
 {
-  "name": "wg-meeting-bot",
+  "name": "wg-meeting-cli",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A cli tool for generating Node.js WG meeting setup",
+  "bin": {
+    "prepare-wg-meeting": "./src/main.js"
+  },
   "scripts": {
     "test": "standard"
   },
@@ -11,20 +13,18 @@
     "url": "git+https://github.com/naugtur/wg-meeting-bot.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "naugtur",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/naugtur/wg-meeting-bot/issues"
   },
   "homepage": "https://github.com/naugtur/wg-meeting-bot#readme",
   "dependencies": {
-    "github": "^9.2.0",
     "markdown-escape": "^1.0.2",
-    "request-promise": "^4.2.1"
+    "minimist": "^1.2.0",
+    "request": "^2.81.0"
   },
   "devDependencies": {
-    "browserify": "^14.4.0",
-    "standard": "^10.0.2",
-    "uglify-js": "^3.0.15"
+    "standard": "^10.0.2"
   }
 }
