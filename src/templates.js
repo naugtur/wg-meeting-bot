@@ -1,6 +1,6 @@
-exports.issue = (agenda) => `## Date/Time
+exports.issue = (date, agenda) => `## Date/Time
 
-(insert date)
+${date}
 
 It's helpful if you give this post a :+1: or :-1: so we know you'd like to attend.
 

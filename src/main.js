@@ -15,22 +15,29 @@ if (argv.config) {
   Object.assign(argv, require(path.resolve(process.cwd(), argv.config)))
 }
 
-if (argv.help || !argv.token || !argv.issuerepo || !argv.tag) {
+if (argv.help || !argv.token || !argv.issuerepo || !argv.tag || !argv.date) {
   console.log('Usage:')
-  console.log('prepare-wg-meeting --token=GITHUB_USER_TOKEN --tag=tag-to-look-for --issuerepo=user/project')
+  console.log(`prepare-wg-meeting
+    --token=GITHUB_USER_TOKEN     token scoped gist,public_repo
+    --tag=tag-to-look-for         eg. diag-agenda
+    --issuerepo=user/project      eg. nodejs/diagnostics
+    --date=date                   meeting date, anything that can be passed to Date()
+    `)
   console.log('  Getting a token: https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/')
   process.exit(1)
 }
+const when = new Date(argv.date)
+const date = `${when.getFullYear()}/${when.getUTCMonth() + 1}/${when.getUTCDate()}`
 
 const fetch = gh.createFetch(argv.token)
 
 agenda.getItems(argv.tag, fetch)
-  .then(items => markdowner.getMarkdown(items, argv.tag))
+  .then(items => markdowner.getMarkdown(date, items, argv.tag))
   .then(content => Promise.all([
     publish.publishMarkdown(content.all, fetch),
     publish.publishIssue(argv.issuerepo, {
-      title: `WG Meeting (insert date)`,
-      body: templates.issue(content.agenda)
+      title: `WG Meeting ${date}`,
+      body: templates.issue(date, content.agenda)
     }, fetch)
   ]))
   .then(([gistUrl, issueUrl]) => {
