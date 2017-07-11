@@ -1,4 +1,5 @@
 const mdesc = require('markdown-escape')
+const templates = require('./templates')
 
 module.exports = {
   getMarkdown (items, tag) {
@@ -12,24 +13,11 @@ module.exports = {
       return `### ${mdesc(item.title)} [${item.repository_url.split('/').reverse()[0]}#${item.number}](${item.html_url}) \n${item.assignees.map(u => ' @' + u.login)}`
     }).join('\n\n')
 
-    const md = `
-# WG Meeting ${date}
-from tag: *${tag}*
-
-## Agenda
-
-${agenda}
-
-## Attendees
-
-## Minutes
-
-${minutes}
-`
+    const md = templates.minutesDoc(date, tag, agenda, minutes)
 
     return {
       all: md,
-      agenda: agenda      
+      agenda: agenda
     }
   }
 }

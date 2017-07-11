@@ -1,13 +1,19 @@
 #!/usr/bin/env node
+const path = require('path')
 const minimist = require('minimist')
 const agenda = require('./agenda')
 const markdowner = require('./markdowner')
 const publish = require('./publish')
+const templates = require('./templates')
 const gh = require('./gh')
 
 const argv = minimist(process.argv.slice(2), {
   string: ['token', 'tag']
 })
+
+if (argv.config) {
+  Object.assign(argv, require(path.resolve(process.cwd(), argv.config)))
+}
 
 if (argv.help || !argv.token || !argv.issuerepo || !argv.tag) {
   console.log('Usage:')
@@ -24,14 +30,7 @@ agenda.getItems(argv.tag, fetch)
     publish.publishMarkdown(content.all, fetch),
     publish.publishIssue(argv.issuerepo, {
       title: `WG Meeting (insert date)`,
-      body: `## Date/Time
-
-(insert date)
-
-It's helpful if you give this post a :+1: or :-1: so we know you'd like to attend.
-
-## Agenda
-${content.agenda}`
+      body: templates.issue(content.agenda)
     }, fetch)
   ]))
   .then(([gistUrl, issueUrl]) => {

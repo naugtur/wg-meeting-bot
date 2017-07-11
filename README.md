@@ -17,6 +17,11 @@ npm i -g wg-meeting-cli
 ```
 prepare-wg-meeting --token=GITHUB_USER_TOKEN --tag=tag-to-look-for --issuerepo=user/project
 ```
+or
+```
+prepare-wg-meeting --config=conf.json
+```
+
 
 Your token needs scope for: gist, public_repo.
 [How to get a token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)
